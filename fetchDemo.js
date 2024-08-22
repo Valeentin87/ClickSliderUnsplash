@@ -1,5 +1,5 @@
 const rndPhoto = document.getElementById('rndPhoto');
-let state = null;
+let newRndPhoto = null;
 
 
 
@@ -10,7 +10,15 @@ const GetPhotoRandom = async () => {
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
-    state = data;
+    newRndPhoto = {
+        url: data.urls.regular,
+        firstName: data.user.first_name,
+        lastName: data.user.last_name,
+        likes: data.likes,
+        myLiked: data.liked_by_user
+        };
+    console.log(newRndPhoto);
+    console.log("*********");
     putPhoto();
     }
     catch(err) {
@@ -21,8 +29,9 @@ const GetPhotoRandom = async () => {
     
 };
 
-const putPhoto = () => {
-    
+const putPhoto = (data) => {
+    return `<div class="rnd_photo">
+    </div>`
 }
 
 GetPhotoRandom();
