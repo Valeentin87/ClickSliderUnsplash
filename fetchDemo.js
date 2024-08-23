@@ -1,3 +1,5 @@
+'use strict';
+
 const rndPhoto = document.getElementById('rndPhoto');
 let newRndPhoto = null;
 
@@ -19,10 +21,11 @@ const GetPhotoRandom = async () => {
         };
     console.log(newRndPhoto);
     console.log("*********");
-    putPhoto();
+    putPhoto(newRndPhoto);
     }
     catch(err) {
         console.log(err);
+        
     };
 
     
@@ -30,8 +33,40 @@ const GetPhotoRandom = async () => {
 };
 
 const putPhoto = (data) => {
-    return `<div class="rnd_photo">
-    </div>`
+    let content = '';
+    onclick = function(){likedPhoto(data)};
+    console.log("sucsess!!!");
+    content = `
+    <div class="text_content">
+     <p class="neon">${data.firstName} ${data.lastName} </p>
+    <p class="likes"> count likes <span>${data.likes}</span> </p>
+    
+    </div>
+    <div class="rnd_photo">
+   
+    
+    <div class="wrap">
+    <button class="button" onclick="onclick">LIKE</button>
+    </div>
+    <div class="image" style="background-image: url(${data.url})"><img src="${data.url}" alt="картинка">
+    
+    </div>
+    </div>`;
+    rndPhoto.innerHTML = content;
+    
 }
+
+
+
+const likedPhoto = (data) => {
+    let photoCount = data.likes;
+    photoCount +=1;
+    data.likes = photoCount;
+    console.log("÷÷÷÷÷÷÷÷÷÷÷");
+    let span = document.getElementsByTagName('span');
+    console.log(span);
+    span[0].innerText = String(photoCount);
+}
+
 
 GetPhotoRandom();
